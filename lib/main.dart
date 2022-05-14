@@ -30,7 +30,14 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: myAppBar(context),
 
-      endDrawer: Drawer(),
+      endDrawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Bolsa de compras", style: TextStyle(fontSize: 18)),
+          ],
+        ),
+      ),
 
       bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.store), label: "Productos"),
