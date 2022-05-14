@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 @override
-AppBar myAppBar(context) {
+AppBar MyAppBar(context) {
   return AppBar(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     title: const Text("MediPlants"),
