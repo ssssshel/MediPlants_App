@@ -28,8 +28,12 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       appBar: myAppBar(context),
 
+=======
+      appBar: MyAppBar(context),
+>>>>>>> c6e37777be3712e31f69f2a4fc8a31b4c0f01913
       endDrawer: Drawer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +42,10 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+<<<<<<< HEAD
 
+=======
+>>>>>>> c6e37777be3712e31f69f2a4fc8a31b4c0f01913
       bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.store), label: "Productos"),
         BottomNavigationBarItem(icon: Icon(Icons.emoji_nature), label: "Menú"),
