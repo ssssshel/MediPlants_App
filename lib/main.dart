@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'components/appbar.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,10 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MediPlants',
       theme: ThemeData(
-        
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightGreen,
       ),
       home: const MyHomePage(),
     );
@@ -26,6 +27,22 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: MyAppBar(context),
+      endDrawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Bolsa de compras", style: TextStyle(fontSize: 18)),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.store), label: "Productos"),
+        BottomNavigationBarItem(icon: Icon(Icons.emoji_nature), label: "Menú"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle), label: "Mi cuenta"),
+      ]),
+    );
   }
 }
