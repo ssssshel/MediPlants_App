@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'components/appBar.dart';
+import 'components/bottombar.dart';
+import 'components/productsbag.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,21 +32,9 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: MyAppBar(context),
 
-      endDrawer: Drawer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Bolsa de compras", style: TextStyle(fontSize: 18)),
-          ],
-        ),
-      ),
+      endDrawer: MyProductsBag(context),
 
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.store), label: "Productos"),
-        BottomNavigationBarItem(icon: Icon(Icons.emoji_nature), label: "Menú"),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle), label: "Mi cuenta"),
-      ]),
+      bottomNavigationBar: MyBottomBar(context)
     );
   }
 }
