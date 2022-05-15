@@ -459,7 +459,6 @@ Widget cuerpo() {
             ' Sirven para la diarrea verde, fracturas óseas, desinflamar y ayudar a la consolidación, calmar dolores reumáticos.',
             style: TextStyle(fontSize: 18),
           ),
-          
           Eneld(),
           Title(
             color: Colors.green,
