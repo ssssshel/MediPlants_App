@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import '../screens/home_page.dart';
 import '../screens/products_menu.dart';
 import '../screens/user_profile.dart';
+
 import '../screens/products_menu_carlos.dart';
+import '../components/productsbagkeiko.dart';
 
 import "../components/appbar.dart";
-// import "../components/bottombar.dart";
 import '../components/productsbag.dart';
 
 class PrincipalPage extends StatefulWidget {
@@ -31,16 +32,24 @@ class _PrincipalPageState extends State<PrincipalPage> {
       _selectedIndex = index;
     });
     pageController.animateToPage(index,
-        duration: Duration(milliseconds: 1000), curve: Curves.easeIn);
+        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
   }
 
   @override
   Widget build(BuildContext context) {
+    // final indexPage = ModalRoute.of(context)!.settings.arguments;
+
+    // if (indexPage == "unitProduct") {
+    //   setState(() {
+    //     _selectedIndex = 1;
+    //   });
+    // }
+
     return Scaffold(
       appBar: MyAppBar(context),
-      endDrawer: MyProductsBag(context),
+      endDrawer: MyProductsBag(),
       body: PageView(
-        children: [MyHomePage(), ProductsMenu(), Inicio()],
+        children: [MyHomePage(), ProductsMenu(), Inicio(), BagKeiko()],
         controller: pageController,
         onPageChanged: onPageChanged,
       ),

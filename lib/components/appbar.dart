@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 @override
-AppBar MyAppBar(context) {
+AppBar MyAppBar(context,
+    {bool isPrincipal = true, String secondaryTitle = ""}) {
   return AppBar(
-    // shape: RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.only(
-    //         bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
-    title: const Text("MediPlants"),
+    title: Text((!isPrincipal) ? "MediPlants > $secondaryTitle" : "MediPlants"),
+    leading: (!isPrincipal) ? _leadingBack(context) : null,
     actions: [
       Builder(builder: (context) {
         return IconButton(
@@ -16,4 +15,12 @@ AppBar MyAppBar(context) {
       })
     ],
   );
+}
+
+@override
+IconButton _leadingBack(BuildContext context) {
+  return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () =>
+          Navigator.of(context).pushNamed("/", arguments: {"unitProduct"}));
 }

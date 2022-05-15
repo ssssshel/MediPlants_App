@@ -36,11 +36,12 @@ class _ProductsMenuState extends State<ProductsMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
+          padding: EdgeInsets.only(top: 20),
           itemCount: products.length,
           itemBuilder: (BuildContext context, int index) {
             // final product = products[index];
             return Card(
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 child: Column(
                   children: [
                     SizedBox(
