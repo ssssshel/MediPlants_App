@@ -49,6 +49,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Abuta',
@@ -72,6 +73,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Achogchilla',
@@ -95,6 +97,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Ajo Sacha',
@@ -118,6 +121,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Amasisa',
@@ -141,6 +145,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Ayahuasca',
@@ -164,6 +169,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Boldo',
@@ -187,6 +193,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Bolsa Mullaca',
@@ -210,6 +217,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Calaguala',
@@ -233,6 +241,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Capirona',
@@ -256,6 +265,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Casho',
@@ -279,6 +289,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Cedro',
@@ -302,6 +313,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Clavo Huasca',
@@ -325,6 +337,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Condurango',
@@ -348,6 +361,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Copaiba',
@@ -371,6 +385,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Corteza de Quina',
@@ -394,6 +409,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Curare',
@@ -417,6 +433,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Chanca Piedra',
@@ -440,6 +457,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Chilca Malva',
@@ -463,6 +481,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Chuchuhuasi',
@@ -486,6 +505,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Eneldo',
@@ -509,6 +529,7 @@ Widget cuerpo() {
           Title(
             color: Colors.green,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   children: [
@@ -531,6 +552,19 @@ Widget cuerpo() {
           Text(
             'La infusión de las hojas adultas de esta planta se emplea en afecciones respiratorias de diversa índole: bronquitis, asma, faringitis, amigdalitis, gripes y resfriados; también para el control de la diabetes, cistitis y vaginitis.',
             style: TextStyle(fontSize: 18),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RaisedButton(
+                child: Icon(Icons.arrow_back_ios),
+                onPressed: () => {},
+              ),
+              RaisedButton(
+                child: Icon(Icons.arrow_forward_ios),
+                onPressed: () => {},
+              ),
+            ],
           ),
         ],
       ),
