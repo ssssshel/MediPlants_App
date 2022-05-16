@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 @override
 AppBar MyAppBar(context,
-    {bool isPrincipal = true, String secondaryTitle = ""}) {
+    {bool isPrincipal = true,
+    String secondaryTitle = "",
+    isNotOrderResume = true}) {
   return AppBar(
     title: Text((!isPrincipal) ? "MediPlants > $secondaryTitle" : "MediPlants"),
     leading: (!isPrincipal) ? _leadingBack(context) : null,
