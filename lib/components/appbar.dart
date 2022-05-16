@@ -4,19 +4,34 @@ import 'package:flutter/material.dart';
 AppBar MyAppBar(context,
     {bool isPrincipal = true,
     String secondaryTitle = "",
-    isNotOrderResume = true}) {
+    bool isNotOrderResume = true}) {
   return AppBar(
     title: Text((!isPrincipal) ? "MediPlants > $secondaryTitle" : "MediPlants"),
     leading: (!isPrincipal) ? _leadingBack(context) : null,
     actions: [
-      Builder(builder: (context) {
-        return IconButton(
-          onPressed: () => Scaffold.of(context).openEndDrawer(),
-          icon: const Icon(Icons.shopping_bag),
-        );
-      })
+      (isNotOrderResume)
+          ? Builder(builder: (context) {
+              return IconButton(
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
+                icon: const Icon(Icons.shopping_bag),
+              );
+            })
+          : SizedBox(
+              height: 1,
+            )
+      // Builder(builder: builder)
+      // _shoppingBag(context)
     ],
   );
+}
+
+@override
+IconButton _shoppingBag(BuildContext context) {
+  return IconButton(
+    onPressed: () => Scaffold.of(context).openEndDrawer(),
+    icon: const Icon(Icons.shopping_bag),
+  );
+  ;
 }
 
 @override
