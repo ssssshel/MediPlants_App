@@ -1,39 +1,21 @@
+import 'dart:convert';
+
 import "package:flutter/material.dart";
 
-class ProductsMenu extends StatefulWidget {
+import '../cn/connect_db.dart';
+import '../mocks/products.dart';
+
+class ProductsMenu extends StatelessWidget {
   ProductsMenu({Key? key}) : super(key: key);
 
-  @override
-  State<ProductsMenu> createState() => _ProductsMenuState();
-}
-
-class _ProductsMenuState extends State<ProductsMenu> {
-  List products = [
-    {
-      "name": "Abuta",
-      "type": "Analgésico",
-      "img": "https://static.inaturalist.org/photos/37321715/large.jpg"
-    },
-    {
-      "name": "Ajo sacha",
-      "type": "Antiglucémico",
-      "img":
-          "https://delamazonas.com/wp-content/uploads/2021/05/Garlic-Vine-Mansoa-alliacea-aka-Ajos-Sacha-in-Kerala-low.jpg"
-    },
-    {
-      "name": "Copaiba",
-      "type": "Cicatrizante",
-      "img":
-          "https://www.pebani.com.pe/wp-content/uploads/2018/05/Copaiba_frutos1.png"
-    },
-  ];
+  List productsMock = prodsMock;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
           padding: EdgeInsets.only(top: 20),
-          itemCount: products.length,
+          // itemCount: products.length,
           itemBuilder: (BuildContext context, int index) {
             // final product = products[index];
             return Card(

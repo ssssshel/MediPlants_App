@@ -4,9 +4,6 @@ import '../screens/home_page.dart';
 import '../screens/products_menu.dart';
 import '../screens/user_profile.dart';
 
-import '../screens/products_menu_carlos.dart';
-import '../components/productsbagkeiko.dart';
-
 import "../components/appbar.dart";
 import '../components/productsbag.dart';
 
