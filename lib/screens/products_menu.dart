@@ -15,7 +15,7 @@ class ProductsMenu extends StatelessWidget {
     return Scaffold(
       body: ListView.builder(
           padding: EdgeInsets.only(top: 20),
-          // itemCount: products.length,
+          itemCount: productsMock.length,
           itemBuilder: (BuildContext context, int index) {
             // final product = products[index];
             return Card(
@@ -26,13 +26,13 @@ class ProductsMenu extends StatelessWidget {
                       height: 310,
                       child: GestureDetector(
                           onTap: () {
-                            _showUnitProductMenu(context);
+                            _showUnitProductMenu(context, index);
                           },
                           child: Column(
                             children: [
                               Container(
                                 child: Image.network(
-                                  "https://static.inaturalist.org/photos/37321715/large.jpg",
+                                  productsMock[index]['img'],
                                   fit: BoxFit.cover,
                                   height: 250,
                                   width: 450,
@@ -50,14 +50,14 @@ class ProductsMenu extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Abuta",
+                                        Text(productsMock[index]['name'],
                                             style: TextStyle(fontSize: 18)),
-                                        Text('Analgésico'),
+                                        Text(productsMock[index]['category']),
                                       ],
                                     ),
                                     TextButton(
                                         onPressed: () {
-                                          _showUnitProductMenu(context);
+                                          _showUnitProductMenu(context, index);
                                         },
                                         child: Text("Ver opciones"))
                                   ],
@@ -73,6 +73,6 @@ class ProductsMenu extends StatelessWidget {
   }
 }
 
-void _showUnitProductMenu(BuildContext context) {
+void _showUnitProductMenu(BuildContext context, int index) {
   Navigator.of(context).pushNamed("/unitproduct");
 }
