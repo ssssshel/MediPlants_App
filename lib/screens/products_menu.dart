@@ -41,7 +41,7 @@ class _ProductsMenuState extends State<ProductsMenu> {
           itemBuilder: (BuildContext context, int index) {
             // final product = products[index];
             return Card(
-                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: Column(
                   children: [
                     SizedBox(
@@ -85,11 +85,6 @@ class _ProductsMenuState extends State<ProductsMenu> {
                                   ],
                                 ),
                               ),
-                              // SizedBox(
-                              //   width: 330,
-                              //   height: 60,
-                              //   child:
-                              // )
                             ],
                           )),
                     )

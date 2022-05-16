@@ -49,7 +49,7 @@ class _PrincipalPageState extends State<PrincipalPage> {
       appBar: MyAppBar(context),
       endDrawer: MyProductsBag(),
       body: PageView(
-        children: [MyHomePage(), ProductsMenu(), Inicio(), BagKeiko()],
+        children: [MyHomePage(), ProductsMenu(), UserProfile()],
         controller: pageController,
         onPageChanged: onPageChanged,
       ),
@@ -60,8 +60,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
           BottomNavigationBarItem(icon: Icon(Icons.store), label: "Productos"),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle), label: "Mi cuenta"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.access_time), label: "Mis ordenes"),
         ],
         currentIndex: _selectedIndex,
         onTap: onTapped,
