@@ -17,6 +17,7 @@ class _UnitProductState extends State<UnitProduct> {
 
   @override
   Widget build(BuildContext context) {
+    final productArguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
         appBar: MyAppBar(context,
             isPrincipal: false, secondaryTitle: "Product name"),

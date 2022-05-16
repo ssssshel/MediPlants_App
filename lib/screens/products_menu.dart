@@ -74,5 +74,5 @@ class ProductsMenu extends StatelessWidget {
 }
 
 void _showUnitProductMenu(BuildContext context, int index) {
-  Navigator.of(context).pushNamed("/unitproduct");
+  Navigator.of(context).pushNamed("/unitproduct", arguments: index);
 }
