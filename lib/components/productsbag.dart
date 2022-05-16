@@ -74,14 +74,14 @@ class _MyProductsBagState extends State<MyProductsBag> {
           ),
           SizedBox(height: 50),
           MaterialButton(
-            onPressed: () {},
+            onPressed: () => _showOrderResume(context),
             color: Colors.cyan,
             height: 50.0,
             minWidth: double.infinity,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
             child: Text(
-              "Finalizar compra",
+              "Realizar compra",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.0,
@@ -183,4 +183,8 @@ Container cardItem(BuildContext context) {
       ],
     ),
   );
+}
+
+void _showOrderResume(BuildContext context) {
+  Navigator.of(context).pushNamed("/orderresume");
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'pages/principal.dart';
 import 'pages/unit_product.dart';
+import 'pages/order_resume.dart';
+import 'pages/order_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (BuildContext context) => PrincipalPage(),
         "/unitproduct": (BuildContext context) => UnitProduct(),
+        "/orderresume": (context) => OrderResume(),
+        "/orderdetails": (BuildContext context) => OrderDetails()
       },
     );
   }

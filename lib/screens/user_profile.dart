@@ -99,7 +99,7 @@ Card _orderCard(BuildContext context) {
             children: [
               Text("Monto total: S/. 25"),
               MaterialButton(
-                onPressed: () {},
+                onPressed: () => _showOrderDetails(context),
                 child: Text("Ver detalles"),
                 color: Colors.lightGreen,
                 height: 25,
@@ -110,4 +110,8 @@ Card _orderCard(BuildContext context) {
       ],
     ),
   ));
+}
+
+void _showOrderDetails(BuildContext context) {
+  Navigator.of(context).pushNamed("/orderdetails");
 }
