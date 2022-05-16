@@ -1,9 +1,5 @@
 import "package:flutter/material.dart";
 
-import '../components/appbar.dart';
-import '../components/bottombar.dart';
-import '../components/productsbag.dart';
-
 class ProductsMenu extends StatefulWidget {
   ProductsMenu({Key? key}) : super(key: key);
 

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../pages/principal.dart';
-
 import '../components/appbar.dart';
 import '../components/productsbag.dart';
 
 class UnitProduct extends StatefulWidget {
-  UnitProduct({Key? key}) : super(key: key);
+  const UnitProduct({Key? key}) : super(key: key);
 
   @override
   State<UnitProduct> createState() => _UnitProductState();
