@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:postgres/postgres.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void connectDB(List<String> arguments) async {
   final connection = PostgreSQLConnection("34.176.102.74", 5432, "bd-certus",
-      username: "postgres", password: "Alstroemeriaaurea15");
+      username: "postgres", password: DotEnv().env['PASSWORD']);
 
   try {
     await connection.open();

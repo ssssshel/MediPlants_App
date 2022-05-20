@@ -47,3 +47,5 @@ app.*.map.json
 
 
 /lib/other_branches
+
+.env
