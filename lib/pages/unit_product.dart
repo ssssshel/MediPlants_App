@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../components/appbar.dart';
 import '../components/productsbag.dart';
 
+import '../mocks/products.dart';
+
 class UnitProduct extends StatefulWidget {
   const UnitProduct({Key? key}) : super(key: key);
 
@@ -11,8 +13,11 @@ class UnitProduct extends StatefulWidget {
 }
 
 class _UnitProductState extends State<UnitProduct> {
+  List productsMock = prodsMock;
+
   @override
   Widget build(BuildContext context) {
+    final productArguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
         appBar: MyAppBar(context,
             isPrincipal: false, secondaryTitle: "Product name"),

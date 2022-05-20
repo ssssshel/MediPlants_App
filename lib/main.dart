@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'pages/principal.dart';
 import 'pages/unit_product.dart';
 import 'pages/order_resume.dart';
 import 'pages/order_details.dart';
 
-void main() {
-  runApp(const MyApp());
+Future main() async {
+  await DotEnv().load(fileName: '.env');
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

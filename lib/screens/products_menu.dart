@@ -1,39 +1,21 @@
+import 'dart:convert';
+
 import "package:flutter/material.dart";
 
-class ProductsMenu extends StatefulWidget {
+import '../cn/connect_db.dart';
+import '../mocks/products.dart';
+
+class ProductsMenu extends StatelessWidget {
   ProductsMenu({Key? key}) : super(key: key);
 
-  @override
-  State<ProductsMenu> createState() => _ProductsMenuState();
-}
-
-class _ProductsMenuState extends State<ProductsMenu> {
-  List products = [
-    {
-      "name": "Abuta",
-      "type": "Analgésico",
-      "img": "https://static.inaturalist.org/photos/37321715/large.jpg"
-    },
-    {
-      "name": "Ajo sacha",
-      "type": "Antiglucémico",
-      "img":
-          "https://delamazonas.com/wp-content/uploads/2021/05/Garlic-Vine-Mansoa-alliacea-aka-Ajos-Sacha-in-Kerala-low.jpg"
-    },
-    {
-      "name": "Copaiba",
-      "type": "Cicatrizante",
-      "img":
-          "https://www.pebani.com.pe/wp-content/uploads/2018/05/Copaiba_frutos1.png"
-    },
-  ];
+  List productsMock = prodsMock;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
           padding: EdgeInsets.only(top: 20),
-          itemCount: products.length,
+          itemCount: productsMock.length,
           itemBuilder: (BuildContext context, int index) {
             // final product = products[index];
             return Card(
@@ -44,13 +26,13 @@ class _ProductsMenuState extends State<ProductsMenu> {
                       height: 310,
                       child: GestureDetector(
                           onTap: () {
-                            _showUnitProductMenu(context);
+                            _showUnitProductMenu(context, index);
                           },
                           child: Column(
                             children: [
                               Container(
                                 child: Image.network(
-                                  "https://static.inaturalist.org/photos/37321715/large.jpg",
+                                  productsMock[index]['img'],
                                   fit: BoxFit.cover,
                                   height: 250,
                                   width: 450,
@@ -68,14 +50,14 @@ class _ProductsMenuState extends State<ProductsMenu> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Abuta",
+                                        Text(productsMock[index]['name'],
                                             style: TextStyle(fontSize: 18)),
-                                        Text('Analgésico'),
+                                        Text(productsMock[index]['category']),
                                       ],
                                     ),
                                     TextButton(
                                         onPressed: () {
-                                          _showUnitProductMenu(context);
+                                          _showUnitProductMenu(context, index);
                                         },
                                         child: Text("Ver opciones"))
                                   ],
@@ -91,6 +73,6 @@ class _ProductsMenuState extends State<ProductsMenu> {
   }
 }
 
-void _showUnitProductMenu(BuildContext context) {
-  Navigator.of(context).pushNamed("/unitproduct");
+void _showUnitProductMenu(BuildContext context, int index) {
+  Navigator.of(context).pushNamed("/unitproduct", arguments: index);
 }
