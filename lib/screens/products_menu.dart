@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import "package:flutter/material.dart";
 
-import '../cn/connect_db.dart';
 import '../mocks/products.dart';
 
 class ProductsMenu extends StatelessWidget {
