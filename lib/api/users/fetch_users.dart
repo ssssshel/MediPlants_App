@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-// Future<Users>
+import '../../entities/info_entity.dart';
 
+// CREATE NEW USER
 class FetchUser {
   static final _client = http.Client();
 
-  static var _registerUrl =
+  static final _registerUrl =
       Uri.parse("https://mediplants-api.herokuapp.com/users");
 
   static register(name, surname, email, password, context) async {
@@ -20,21 +21,17 @@ class FetchUser {
       "email": email,
       "password": password
     });
-    if (response.statusCode == 201) {
-      var resJson = jsonDecode(response.body);
-      await EasyLoading.showSuccess(
-        "Success code: ${response.statusCode.toString()}"
-      );
-      // if (resJson[0] == true) {
-      //   await EasyLoading.showSuccess(resJson[0]);
 
-      // }else{
-      //   EasyLoading.showError(resJson[0]);
-      // }
-    }else{
-      await EasyLoading.showError(
-        "Error code: ${response.statusCode.toString()}"
-      );
+    final _resJson = jsonDecode(response.body);
+    final _userObject = InfoEntity.fromjson(_resJson);
+    if (response.statusCode == 201) {
+      await EasyLoading.showSuccess(
+          "Successfull register: ${_userObject.message}");
+      Navigator.pushNamed(context, '/login');
+    } else {
+      await EasyLoading.showError("Error code: ${_userObject.message}");
     }
   }
+
+  static login(email, password, context) async {}
 }
