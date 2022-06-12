@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mediplants_app/controller/helper.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -38,7 +39,10 @@ class UserProfile extends StatelessWidget {
                 color: Colors.lightGreen[100],
               ),
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  AuthService authService = AuthService();
+                  authService.logOutUser(context);
+                },
                 child: Text("Cerrar Sesión"),
                 color: Colors.lightGreen,
               )
