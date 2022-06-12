@@ -1,15 +1,15 @@
-class User {
+class UserEntity {
   int id = 0;
   String name = "";
   String email = "";
 
-  User({
+  UserEntity({
     required this.id,
     required this.name,
     required this.email,
   });
 
-  factory User.fromjson(Map<String, dynamic> json) {
-    return User(id: json['id'], name: json['name'], email: json['email']);
+  factory UserEntity.fromjson(Map<String, dynamic> json) {
+    return UserEntity(id: json['id'], name: json['name'], email: json['email']);
   }
 }
