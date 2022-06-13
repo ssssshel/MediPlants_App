@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
 
-import '../api/users/fetch_users.dart';
+import 'package:flutter/material.dart';
+import 'package:mediplants_app/services/auth.dart';
 
 class Register extends StatefulWidget {
   Register({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  AuthService authService = AuthService.instance();
   late String name;
   late String surname;
   late String email;
@@ -94,7 +96,9 @@ class _RegisterState extends State<Register> {
                     if (!_formKey.currentState!.validate()) {
                       return;
                     } else {
-                      FetchUser.register(
+                      // FetchUser.register(
+                      //     name, surname, email, password, context);
+                      authService.signUp(
                           name, surname, email, password, context);
                     }
                   },

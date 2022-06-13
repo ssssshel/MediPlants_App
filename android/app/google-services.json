@@ -29,6 +29,13 @@
             {
               "client_id": "197834349832-sdslpm8dg38hugum48fbvlkum38rpif6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "197834349832-eqcgh2bit98r47lmv879smd5t1c8iqce.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mediplantsApp"
+              }
             }
           ]
         }

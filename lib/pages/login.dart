@@ -1,5 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:mediplants_app/api/users/fetch_users.dart';
+import 'package:mediplants_app/services/auth.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  AuthService authService = AuthService.instance();
   late String email;
   late String password;
 
@@ -33,6 +36,7 @@ class _LoginState extends State<Login> {
                     }
                     return null;
                   },
+                  // ignore: prefer_const_constructors
                   decoration: InputDecoration(hintText: "Correo electrónico"),
                   onChanged: (value) {
                     setState(() {
@@ -63,13 +67,14 @@ class _LoginState extends State<Login> {
                     if (!_formKey.currentState!.validate()) {
                       return;
                     } else {
-                      FetchUser.login(email, password, context);
+                      // FetchUser.login(email, password, context);
+                      authService.signIn(email, password, context);
                     }
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 20),
                     child: Center(
-                      child: Text("Registrar"),
+                      child: Text("Iniciar sesión"),
                     ),
                     height: 40,
                     decoration: BoxDecoration(color: Colors.lightGreen),

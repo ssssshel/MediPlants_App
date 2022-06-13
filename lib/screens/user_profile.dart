@@ -1,7 +1,18 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
 
-class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:mediplants_app/models/user.dart';
+import 'package:mediplants_app/services/auth.dart';
+
+class UserProfile extends StatefulWidget {
+  UserProfile({Key? key}) : super(key: key);
+
+  @override
+  State<UserProfile> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
+  AuthService authService = AuthService.instance();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +32,7 @@ class UserProfile extends StatelessWidget {
               ),
               Expanded(
                   child: Text(
-                "Nombre de usuario",
+                "${authService.user.email} ",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ))
             ],
@@ -38,7 +49,9 @@ class UserProfile extends StatelessWidget {
                 color: Colors.lightGreen[100],
               ),
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  authService.signOut(context);
+                },
                 child: Text("Cerrar Sesión"),
                 color: Colors.lightGreen,
               )
