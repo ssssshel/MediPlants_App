@@ -16,6 +16,7 @@ class _RegisterState extends State<Register> {
   late String surname;
   late String email;
   late String password;
+  late String cellphone;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -62,6 +63,20 @@ class _RegisterState extends State<Register> {
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
+                      return 'Ingresa un número de celular';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(hintText: "Celular"),
+                  onChanged: (value) {
+                    setState(() {
+                      cellphone = value;
+                    });
+                  },
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
                       return 'Ingresa un correo';
                     }
                     return null;
@@ -96,10 +111,8 @@ class _RegisterState extends State<Register> {
                     if (!_formKey.currentState!.validate()) {
                       return;
                     } else {
-                      // FetchUser.register(
-                      //     name, surname, email, password, context);
                       authService.signUp(
-                          name, surname, email, password, context);
+                          name, surname, email, password, cellphone, context);
                     }
                   },
                   child: Container(

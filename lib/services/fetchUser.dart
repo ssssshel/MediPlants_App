@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../entities/register_entity.dart';
+import '../entities/data_entity.dart';
 
 class FetchUser {
   static final _client = http.Client();
@@ -22,7 +21,7 @@ class FetchUser {
     });
 
     final _resJson = jsonDecode(response.body);
-    var _userObject = RegisterEntity.fromjson(_resJson);
+    var _userObject = DataEntity.fromjson(_resJson);
     if (response.statusCode == 201) {
       // await EasyLoading.showSuccess(
       //     "Successfull register: ${_userObject.message}");
