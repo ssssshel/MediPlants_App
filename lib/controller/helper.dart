@@ -76,7 +76,8 @@ class AuthService{
           "name": name.text,
           "surname": surname.text,
           "email": email.text,
-          "password": password.text
+          "cellphone": cellphone.text,
+          "fireid": auth.currentUser!.uid
         });
         Navigator.push(
           context, 
