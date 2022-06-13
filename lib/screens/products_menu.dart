@@ -1,8 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import "package:flutter/material.dart";
 
-import '../cn/connect_db.dart';
 import '../mocks/products.dart';
 
 class ProductsMenu extends StatelessWidget {

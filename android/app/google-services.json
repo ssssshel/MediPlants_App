@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "197834349832",
+    "project_id": "mediplants-51454",
+    "storage_bucket": "mediplants-51454.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197834349832:android:033fb751db8e2aa04c20bd",
+        "android_client_info": {
+          "package_name": "com.example.mediplants_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197834349832-sdslpm8dg38hugum48fbvlkum38rpif6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3aRGkc_twfzpD4MDmszbBLizF1FOQ8iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197834349832-sdslpm8dg38hugum48fbvlkum38rpif6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "197834349832-eqcgh2bit98r47lmv879smd5t1c8iqce.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mediplantsApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
