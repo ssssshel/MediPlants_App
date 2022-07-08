@@ -14,17 +14,19 @@ class ProductsMenu extends StatefulWidget {
 
 class _ProductsMenuState extends State<ProductsMenu> {
   List<dynamic> items = [];
-  bool hasMore = true;
+  // bool hasMore = true;
 
   @override
   void initState() {
     super.initState();
     fetch();
+    // if (!mounted) {
+    // }
   }
 
   @override
-  void dispose() {
-    super.dispose();
+  void deactivate() {
+    super.deactivate();
   }
 
   Future fetch() async {
@@ -35,9 +37,6 @@ class _ProductsMenuState extends State<ProductsMenu> {
       final List newItems = json.decode(response.body);
 
       setState(() {
-        if (newItems.length < 10) {
-          hasMore = false;
-        }
         items.addAll(newItems.map<List<dynamic>>((item) {
           // final id = item['id'];
           // return "Item $id";
