@@ -19,10 +19,12 @@ class _UnitProductState extends State<UnitProduct> {
 
   @override
   Widget build(BuildContext context) {
-    final productArguments = ModalRoute.of(context)!.settings.arguments;
+    final productArguments =
+        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
+
     return Scaffold(
         appBar: MyAppBar(context,
-            isPrincipal: false, secondaryTitle: "Product name"),
+            isPrincipal: false, secondaryTitle: productArguments[1]),
         endDrawer: MyProductsBag(),
         body: Container(
           padding: EdgeInsets.symmetric(vertical: 40, horizontal: 25),
@@ -30,7 +32,8 @@ class _UnitProductState extends State<UnitProduct> {
             children: [
               Container(
                 child: Image.network(
-                    "https://static.inaturalist.org/photos/37321715/large.jpg"),
+                  productArguments[4],
+                ),
               ),
               SizedBox(
                 height: 30,
@@ -42,11 +45,11 @@ class _UnitProductState extends State<UnitProduct> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Abuta",
+                        Text(productArguments[1],
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.normal)),
                         Text(
-                          "Nombre científico",
+                          productArguments[2],
                           style: TextStyle(
                               fontSize: 15, fontStyle: FontStyle.italic),
                         )
@@ -58,7 +61,7 @@ class _UnitProductState extends State<UnitProduct> {
                     Row(
                       children: [
                         Text(
-                          "Antinflamatorio",
+                          productArguments[3],
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 15),
                         ),
@@ -72,7 +75,7 @@ class _UnitProductState extends State<UnitProduct> {
                       children: [
                         Text("Bolsa de 100 gramos"),
                         Text(
-                          "S/. 12",
+                          'S/. ${productArguments[5]}',
                           style: TextStyle(fontSize: 16),
                         )
                       ],
@@ -104,8 +107,7 @@ class _UnitProductState extends State<UnitProduct> {
                       ],
                     ),
                     SizedBox(height: 10),
-                    Text(
-                        "Analgésico dental, tónico cerebral, anemia, colesterol, cólico menstrual, diabetes, dismenorrea, esterilidad femenina, fiebre, hemorragia post-menstrual y post operatoria, paludismo, reumatismo, tifoidea, ulceras estomacales.")
+                    Text(productArguments[6])
                   ],
                 ),
               )
