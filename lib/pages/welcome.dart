@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class Welcome extends StatelessWidget {
@@ -11,8 +13,16 @@ class Welcome extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(child: Center(child: Text("Bienvenido a Mediplants", style: TextStyle(fontSize: 26),)),),
-              SizedBox(height: 50,),
+              Container(
+                child: Center(
+                    child: Text(
+                  "Bienvenido a Mediplants",
+                  style: TextStyle(fontSize: 26),
+                )),
+              ),
+              SizedBox(
+                height: 50,
+              ),
               MaterialButton(
                   onPressed: () {
                     Navigator.pushNamed(context, "/register");
@@ -20,20 +30,20 @@ class Welcome extends StatelessWidget {
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Center(
-
-                    child: Text("Registrate"),
+                      child: Text("Registrate"),
                     ),
                     height: 40,
                     width: double.infinity,
                     decoration: BoxDecoration(color: Colors.lightGreen),
                   )),
               MaterialButton(
-                  onPressed: () {Navigator.pushNamed(context, "/login");},
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/login");
+                  },
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Center(
-
-                    child: Text("Iniciar sesión"),
+                      child: Text("Iniciar sesión"),
                     ),
                     height: 40,
                     width: double.infinity,

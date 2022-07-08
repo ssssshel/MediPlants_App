@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:mediplants_app/controller/helper.dart';
 
-class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
+class _UserProfileState extends State<UserProfile> {
+  AuthService authService = AuthService.instance();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class UserProfile extends StatelessWidget {
               ),
               Expanded(
                   child: Text(
-                "Nombre de usuario",
+                "${authService.user.email} ",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ))
             ],
