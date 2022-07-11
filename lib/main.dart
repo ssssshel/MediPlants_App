@@ -6,8 +6,9 @@ import 'package:mediplants_app/services/auth.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/welcome.dart';
+import 'pages/checkout.dart';
 import 'pages/register.dart';
+import 'pages/welcome.dart';
 import 'pages/login.dart';
 import 'pages/principal.dart';
 import 'pages/unit_product.dart';
@@ -17,7 +18,7 @@ import 'pages/order_details.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(name: "MediPlants", options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
@@ -63,6 +64,7 @@ class _MyAppState extends State<MyApp> {
           // "/": (BuildContext context) => Welcome(),
           "/unitproduct": (BuildContext context) => UnitProduct(),
           "/orderresume": (context) => OrderResume(),
+          "/checkout": (context) => Checkout(),
           "/orderdetails": (BuildContext context) => OrderDetails(),
           "/welcome": (context) => Welcome(),
           "/register": (context) => Register(),

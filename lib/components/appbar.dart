@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+const kPrimaryColor = Color.fromARGB(255,203,227,100);
 
 @override
 AppBar MyAppBar(context,
@@ -6,7 +7,8 @@ AppBar MyAppBar(context,
     String secondaryTitle = "",
     bool isNotOrderResume = true}) {
   return AppBar(
-    title: Text((!isPrincipal) ? "MediPlants > $secondaryTitle" : "MediPlants"),
+    backgroundColor: kPrimaryColor,
+    elevation: 0,
     leading: (!isPrincipal) ? _leadingBack(context) : null,
     actions: [
       (isNotOrderResume)
@@ -14,6 +16,7 @@ AppBar MyAppBar(context,
               return IconButton(
                 onPressed: () => Scaffold.of(context).openEndDrawer(),
                 icon: const Icon(Icons.shopping_bag),
+                color: Colors.white,
               );
             })
           : SizedBox(

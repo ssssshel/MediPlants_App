@@ -49,7 +49,6 @@ class _PrincipalPageState extends State<PrincipalPage> {
 
     return Scaffold(
       appBar: MyAppBar(context),
-      endDrawer: MyProductsBag(),
       body: PageView(
         children: [MyHomePage(), ProductsMenu(), UserProfile()],
         controller: pageController,
@@ -67,8 +66,9 @@ class _PrincipalPageState extends State<PrincipalPage> {
         onTap: onTapped,
         selectedItemColor: Colors.lightGreen,
         unselectedItemColor: Colors.grey,
-        
       ),
     );
   }
 }
+
+

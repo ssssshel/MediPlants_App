@@ -9,6 +9,10 @@ class MyProductsBag extends StatefulWidget {
   State<MyProductsBag> createState() => _MyProductsBagState();
 }
 
+const kPrimaryColor = Color.fromARGB(255,203,227,100);
+const kPrimaryLightColor = Color.fromARGB(90,43,144,84);
+const kTextColor = Color(0xFF3C4046);
+
 class _MyProductsBagState extends State<MyProductsBag> {
   @override
   Widget build(BuildContext context) {
@@ -77,7 +81,7 @@ class _MyProductsBagState extends State<MyProductsBag> {
           SizedBox(height: 50),
           MaterialButton(
             onPressed: () => _showOrderResume(context),
-            color: Colors.cyan,
+            color: kPrimaryColor,
             height: 50.0,
             minWidth: double.infinity,
             shape: RoundedRectangleBorder(
@@ -163,7 +167,7 @@ Container cardItem(BuildContext context) {
                     width: 20.0,
                     height: 20.0,
                     decoration: BoxDecoration(
-                        color: Colors.blue[300],
+                        color: kPrimaryColor,
                         borderRadius: BorderRadius.circular(4.0)),
                     child: IconButton(
                       padding: EdgeInsets.only(right: 0),

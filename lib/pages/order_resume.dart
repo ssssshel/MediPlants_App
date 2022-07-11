@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../components/appbar.dart';
 import '../components/productsbag.dart';
+import 'checkout.dart';
 
 class OrderResume extends StatefulWidget {
   OrderResume({Key? key}) : super(key: key);
@@ -11,6 +12,11 @@ class OrderResume extends StatefulWidget {
   @override
   State<OrderResume> createState() => _OrderResumeState();
 }
+
+const kPrimaryColor = Color.fromARGB(255,203,227,100);
+const kPrimaryLightColor = Color.fromARGB(90,43,144,84);
+const kTextColor = Color(0xFF3C4046);
+
 
 class _OrderResumeState extends State<OrderResume> {
   @override
@@ -82,14 +88,14 @@ class _OrderResumeState extends State<OrderResume> {
             ),
             SizedBox(height: 50),
             MaterialButton(
-              onPressed: () {},
-              color: Colors.cyan,
+              onPressed: () => _showCheckout(context),
+              color: kPrimaryColor,
               height: 50.0,
               minWidth: double.infinity,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
               child: Text(
-                "Ir a pagar",
+                "Ir a pagars",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14.0,
@@ -101,4 +107,9 @@ class _OrderResumeState extends State<OrderResume> {
       ),
     );
   }
+}
+
+
+void _showCheckout(BuildContext context) {
+  Navigator.of(context).pushNamed("/checkout");
 }
