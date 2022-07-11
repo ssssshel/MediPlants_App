@@ -1,11 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../components/appbar.dart';
 import '../components/productsbag.dart';
 
 import '../mocks/products.dart';
+
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import '../models/product.cart.dart';
+
+// Product product = Product();
 
 class UnitProduct extends StatefulWidget {
   const UnitProduct({Key? key}) : super(key: key);
@@ -31,7 +39,7 @@ class _UnitProductState extends State<UnitProduct> {
     final productArguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
         appBar: MyAppBar(context,
-            isPrincipal: false, secondaryTitle: "Product name"),
+            isPrincipal: false, secondaryTitle: productArguments[1]),
         endDrawer: MyProductsBag(),
         body: SingleChildScrollView(
       child: Column(

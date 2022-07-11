@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import './carditem.dart';
+import '../models/product.cart.dart';
 
 class MyProductsBag extends StatefulWidget {
   MyProductsBag({Key? key}) : super(key: key);
@@ -14,6 +16,15 @@ const kPrimaryLightColor = Color.fromARGB(90,43,144,84);
 const kTextColor = Color(0xFF3C4046);
 
 class _MyProductsBagState extends State<MyProductsBag> {
+  int getSubtotal(List<Product> products) {
+    var sumaprice = 0;
+
+    products.forEach((element) {
+      sumaprice += element.price as int;
+    });
+    return sumaprice;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -21,7 +32,7 @@ class _MyProductsBagState extends State<MyProductsBag> {
       padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 15),
       // Scrollable(viewportBuilder: viewportBuilder),
 
-      child: ListView(
+      child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -31,11 +42,28 @@ class _MyProductsBagState extends State<MyProductsBag> {
               fontSize: 21.0,
             ),
           ),
-          cardItem(context),
-          cardItem(context),
-          cardItem(context),
-          cardItem(context),
-          cardItem(context),
+          Expanded(
+            child: FutureBuilder<List<Product>>(
+              future: DatabaseHelper.instance.getProducts(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Product>> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: Text('Cargando'),
+                  );
+                }
+                return snapshot.data!.isEmpty
+                    ? Center(
+                        child: Text("Tu bolsa está vacía"),
+                      )
+                    : ListView(
+                        children: snapshot.data!.map((product) {
+                          return cardItem(context, product);
+                        }).toList(),
+                      );
+              },
+            ),
+          ),
           SizedBox(height: 21.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,7 +129,7 @@ class _MyProductsBagState extends State<MyProductsBag> {
 }
 
 @override
-Container cardItem(BuildContext context) {
+Container cardItem(BuildContext context, Product product) {
   return Container(
     color: Colors.white,
     margin: EdgeInsets.symmetric(vertical: 4.0),

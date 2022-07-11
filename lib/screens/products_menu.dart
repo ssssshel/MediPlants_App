@@ -5,10 +5,6 @@ import 'dart:convert';
 import "package:flutter/material.dart";
 import 'package:http/http.dart' as http;
 
-import '../mocks/products.dart';
-import '../services/fetchProducts.dart';
-import '../models/products.dart';
-
 class ProductsMenu extends StatefulWidget {
   ProductsMenu({Key? key}) : super(key: key);
 
@@ -16,11 +12,9 @@ class ProductsMenu extends StatefulWidget {
   State<ProductsMenu> createState() => _ProductsMenuState();
 }
 
-List<ProductsModel>? products;
-
-final _client = http.Client();
-final _fetchProductsUrl =
-    Uri.parse("https://mediplants-api.herokuapp.com/products");
+class _ProductsMenuState extends State<ProductsMenu> {
+  List<dynamic> items = [];
+  // bool hasMore = true;
 
 const double kDefaultPadding = 15.0;
 const kPrimaryColor = Color.fromARGB(255,43,144,84);
@@ -29,21 +23,35 @@ const kPrimaryLightColor = Color.fromARGB(90,43,144,84);
 Future<void> getProducts() async {
   http.Response response = await _client.get(_fetchProductsUrl);
 
-  if (response.statusCode == 200) {
-    List jsonData = jsonDecode(response.body);
-    jsonData
-        .map((dynamic json) => products?.add(ProductsModel.fromjson(json)))
-        .toList();
-  } else {
-    throw Exception("fallo el llamado al API");
+  @override
+  void deactivate() {
+    super.deactivate();
   }
-}
 
-class _ProductsMenuState extends State<ProductsMenu> {
-  List productsMock = prodsMock;
-  // final productsMock = ProductsModel().products;
-  // final Future<ProductsModel> products = getProducts();
-  // late List<ProductsModel> products;
+  Future fetch() async {
+    final url = Uri.parse("https://mediplants-api.herokuapp.com/products");
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List newItems = json.decode(response.body);
+
+      setState(() {
+        items.addAll(newItems.map<List<dynamic>>((item) {
+          // final id = item['id'];
+          // return "Item $id";
+          final id = item['id'];
+          final name = item['name'];
+          final scname = item['scname'];
+          final category = item['category'];
+          final img = item['img'];
+          final price = item['price'];
+          final information = item['information'];
+          final stock = item['stock'];
+          return [id, name, scname, category, img, price, information, stock];
+        }));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,8 +150,8 @@ class _ProductsMenuState extends State<ProductsMenu> {
   }
 }
 
-void _showUnitProductMenu(BuildContext context, int index) {
-  Navigator.of(context).pushNamed("/unitproduct", arguments: index);
+void _showUnitProductMenu(BuildContext context, List<dynamic> item) {
+  Navigator.of(context).pushNamed("/unitproduct", arguments: item);
 }
 
 
