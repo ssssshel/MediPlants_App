@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import './carditem.dart';
+import '../models/product.cart.dart';
 
 class MyProductsBag extends StatefulWidget {
   MyProductsBag({Key? key}) : super(key: key);
@@ -10,6 +12,15 @@ class MyProductsBag extends StatefulWidget {
 }
 
 class _MyProductsBagState extends State<MyProductsBag> {
+  int getSubtotal(List<Product> products) {
+    var sumaprice = 0;
+
+    products.forEach((element) {
+      sumaprice += element.price as int;
+    });
+    return sumaprice;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -17,7 +28,7 @@ class _MyProductsBagState extends State<MyProductsBag> {
       padding: EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 15),
       // Scrollable(viewportBuilder: viewportBuilder),
 
-      child: ListView(
+      child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -27,11 +38,28 @@ class _MyProductsBagState extends State<MyProductsBag> {
               fontSize: 21.0,
             ),
           ),
-          cardItem(context),
-          cardItem(context),
-          cardItem(context),
-          cardItem(context),
-          cardItem(context),
+          Expanded(
+            child: FutureBuilder<List<Product>>(
+              future: DatabaseHelper.instance.getProducts(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Product>> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: Text('Cargando'),
+                  );
+                }
+                return snapshot.data!.isEmpty
+                    ? Center(
+                        child: Text("Tu bolsa está vacía"),
+                      )
+                    : ListView(
+                        children: snapshot.data!.map((product) {
+                          return cardItem(context, product);
+                        }).toList(),
+                      );
+              },
+            ),
+          ),
           SizedBox(height: 21.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,96 +125,6 @@ class _MyProductsBagState extends State<MyProductsBag> {
 }
 
 @override
-Container cardItem(BuildContext context) {
-  return Container(
-    color: Colors.white,
-    margin: EdgeInsets.symmetric(vertical: 4.0),
-    child: Row(
-      children: [
-        Container(
-          width: 80.0,
-          height: 80.0,
-          color: Colors.grey[100],
-          child: Center(
-              child: Container(
-            width: 70.0,
-            height: 70.0,
-            padding: EdgeInsets.all(4.0),
-            decoration: BoxDecoration(
-                color: Colors.grey[100],
-                image: DecorationImage(
-                    image: NetworkImage(
-                        "https://www.vistafarma.com/blog/wp-content/uploads/2019/03/Propiedades-de-la-u%C3%B1a-de-gato.jpg")),
-                borderRadius: BorderRadius.circular(20.0)),
-          )),
-        ),
-        SizedBox(width: 12.0),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                  width: 100.0,
-                  child: Text(
-                    "Uña de gato",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),
-              SizedBox(height: 4.0),
-
-              // ALTERNADORES DE CANTIDAD
-              Row(
-                children: [
-                  Container(
-                    width: 20.0,
-                    height: 20.0,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(4.0)),
-                    child: IconButton(
-                      padding: EdgeInsets.only(right: 0),
-                      iconSize: 15.0,
-                      icon: (Icon(Icons.remove, color: Colors.white)),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      "1",
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Container(
-                    width: 20.0,
-                    height: 20.0,
-                    decoration: BoxDecoration(
-                        color: Colors.blue[300],
-                        borderRadius: BorderRadius.circular(4.0)),
-                    child: IconButton(
-                      padding: EdgeInsets.only(right: 0),
-                      iconSize: 15.0,
-                      icon: (Icon(Icons.add, color: Colors.white)),
-                      onPressed: () {},
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    "S/. 20.00",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
-    ),
-  );
-}
-
 void _showOrderResume(BuildContext context) {
   Navigator.of(context).pushNamed("/orderresume");
 }

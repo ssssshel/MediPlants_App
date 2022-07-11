@@ -116,7 +116,7 @@ class _ProductsMenuState extends State<ProductsMenu> {
                     ],
                   ));
             } else {
-              return Text("No hay más productos");
+              return Text("No hay productos");
             }
           }),
     );

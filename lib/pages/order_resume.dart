@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 import '../components/appbar.dart';
 import '../components/productsbag.dart';
+import '../components/carditem.dart';
+import '../models/product.cart.dart';
+import '../services/createorder.dart';
 
 class OrderResume extends StatefulWidget {
   OrderResume({Key? key}) : super(key: key);
@@ -13,6 +16,9 @@ class OrderResume extends StatefulWidget {
 }
 
 class _OrderResumeState extends State<OrderResume> {
+  // dynamic products = DatabaseHelper.instance.getProducts();
+  String products = "ddd42";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +29,7 @@ class _OrderResumeState extends State<OrderResume> {
       endDrawer: MyProductsBag(),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 40, horizontal: 25),
-        child: ListView(
+        child: Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -33,11 +39,26 @@ class _OrderResumeState extends State<OrderResume> {
                 fontSize: 21.0,
               ),
             ),
-            cardItem(context),
-            cardItem(context),
-            cardItem(context),
-            cardItem(context),
-            cardItem(context),
+            Expanded(
+                child: FutureBuilder<List<Product>>(
+                    future: DatabaseHelper.instance.getProducts(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<List<Product>> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: Text('Cargando'),
+                        );
+                      }
+                      return snapshot.data!.isEmpty
+                          ? Center(
+                              child: Text("Tu carrito está vacio"),
+                            )
+                          : ListView(
+                              children: snapshot.data!.map((product) {
+                                return cardItem(context, product);
+                              }).toList(),
+                            );
+                    })),
             SizedBox(height: 21.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,7 +103,11 @@ class _OrderResumeState extends State<OrderResume> {
             ),
             SizedBox(height: 50),
             MaterialButton(
-              onPressed: () {},
+              onPressed: () async {
+                await OrdersHelper.instance.createOrder(
+                    Order(products: "fff", price: "fffff", email: "ffefefe"),
+                    context);
+              },
               color: Colors.cyan,
               height: 50.0,
               minWidth: double.infinity,
