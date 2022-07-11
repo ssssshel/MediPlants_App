@@ -3,77 +3,126 @@
 import 'dart:convert';
 
 import "package:flutter/material.dart";
+import 'package:http/http.dart' as http;
 
-import '../mocks/products.dart';
-
-class ProductsMenu extends StatelessWidget {
+class ProductsMenu extends StatefulWidget {
   ProductsMenu({Key? key}) : super(key: key);
 
-  List productsMock = prodsMock;
+  @override
+  State<ProductsMenu> createState() => _ProductsMenuState();
+}
+
+class _ProductsMenuState extends State<ProductsMenu> {
+  List<dynamic> items = [];
+  // bool hasMore = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetch();
+    // if (!mounted) {
+    // }
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+  }
+
+  Future fetch() async {
+    final url = Uri.parse("https://mediplants-api.herokuapp.com/products");
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List newItems = json.decode(response.body);
+
+      setState(() {
+        items.addAll(newItems.map<List<dynamic>>((item) {
+          // final id = item['id'];
+          // return "Item $id";
+          final id = item['id'];
+          final name = item['name'];
+          final scname = item['scname'];
+          final category = item['category'];
+          final img = item['img'];
+          final price = item['price'];
+          final information = item['information'];
+          final stock = item['stock'];
+          return [id, name, scname, category, img, price, information, stock];
+        }));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
           padding: EdgeInsets.only(top: 20),
-          itemCount: productsMock.length,
-          itemBuilder: (BuildContext context, int index) {
-            // final product = products[index];
-            return Card(
-                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 310,
-                      child: GestureDetector(
-                          onTap: () {
-                            _showUnitProductMenu(context, index);
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                child: Image.network(
-                                  productsMock[index]['img'],
-                                  fit: BoxFit.cover,
-                                  height: 250,
-                                  width: 450,
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            if (index <= items.length) {
+              final item = items[index];
+
+              return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 310,
+                        child: GestureDetector(
+                            onTap: () {
+                              _showUnitProductMenu(context, item);
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  child: Image.network(
+                                    item[4],
+                                    fit: BoxFit.cover,
+                                    height: 250,
+                                    width: 450,
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(productsMock[index]['name'],
-                                            style: TextStyle(fontSize: 18)),
-                                        Text(productsMock[index]['category']),
-                                      ],
-                                    ),
-                                    TextButton(
-                                        onPressed: () {
-                                          _showUnitProductMenu(context, index);
-                                        },
-                                        child: Text("Ver opciones"))
-                                  ],
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(item[1],
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(item[3]),
+                                        ],
+                                      ),
+                                      TextButton(
+                                          onPressed: () {
+                                            _showUnitProductMenu(context, item);
+                                          },
+                                          child: Text("Ver opciones"))
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )),
-                    )
-                  ],
-                ));
+                              ],
+                            )),
+                      )
+                    ],
+                  ));
+            } else {
+              return Text("No hay productos");
+            }
           }),
     );
   }
 }
 
-void _showUnitProductMenu(BuildContext context, int index) {
-  Navigator.of(context).pushNamed("/unitproduct", arguments: index);
+void _showUnitProductMenu(BuildContext context, List<dynamic> item) {
+  Navigator.of(context).pushNamed("/unitproduct", arguments: item);
 }

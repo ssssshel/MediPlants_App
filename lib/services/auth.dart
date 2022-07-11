@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:mediplants_app/entities/register_entity.dart';
 import 'package:mediplants_app/models/user.dart';
 
 import 'package:http/http.dart' as http;
@@ -17,7 +16,6 @@ class AuthService with ChangeNotifier {
   AuthStatus _status = AuthStatus.Unitialized;
   // FetchUser fetchUser = FetchUser().createUser();
   UserModel _user = UserModel();
-  RegisterEntity _registerEntity = RegisterEntity();
   final _client = http.Client();
   // final FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -43,27 +41,52 @@ class AuthService with ChangeNotifier {
 
 // REGISTRO DE USUARIO
   Future signUp(String name, String surname, String email, String password,
-      context) async {
+      String cellphone, context) async {
+    // try {
+    //   http.Response response = await _client.post(_registerUrl, body: {
+    //     "name": name,
+    //     "surname": surname,
+    //     "email": email,
+    //     "role": "user",
+    //     "cellphone": cellphone,
+    //   });
+    //   final _resJson = jsonDecode(response.body);
+    //   final _userObject = RegisterEntity.fromjson(_resJson);
+    //   if (response.statusCode == 201) {
+    //     await _auth.createUserWithEmailAndPassword(
+    //         email: email, password: password);
+    //     await EasyLoading.showSuccess("Successfull register",
+    //         duration: Duration(seconds: 2), dismissOnTap: true);
+    //     Navigator.pushNamed(context, "/");
+    //   } else {
+    //     await EasyLoading.showError("Error cod: ${_userObject.message}");
+    //   }
+    // } catch (e) {
+    //   await EasyLoading.showError("Error cod: ${e}",
+    //       duration: Duration(seconds: 2), dismissOnTap: true);
+    // }
     try {
-      // await FetchUser.createUser(name, surname, email, context);
-      http.Response response = await _client.post(_registerUrl, body: {
-        "name": name,
-        "surname": surname,
-        "email": email,
-        "role": "user",
+      await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) async {
+        final userId = _auth.currentUser!.uid;
+        http.Response response = await _client.post(_registerUrl, body: {
+          "name": name,
+          "surname": surname,
+          "email": email,
+          "role": "user",
+          "cellphone": cellphone,
+          "fireid": userId,
+        });
+        if (response.statusCode == 201) {
+          await EasyLoading.showSuccess("Successfull register",
+              duration: Duration(seconds: 2), dismissOnTap: true);
+          Navigator.pushNamed(context, "/");
+        } else {
+          await EasyLoading.showError("Error cod: ${response.statusCode}");
+        }
       });
-      final _resJson = jsonDecode(response.body);
-      final _userObject = RegisterEntity.fromjson(_resJson);
-      if (response.statusCode == 201) {
-        await _auth.createUserWithEmailAndPassword(
-            email: email, password: password);
-        await EasyLoading.showSuccess("Successfull register",
-            duration: Duration(seconds: 2), dismissOnTap: true);
-        Navigator.pushNamed(context, "/");
-      } else {
-        await EasyLoading.showError("Error cod: ${_userObject.message}");
-      }
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       await EasyLoading.showError("Error cod: ${e}",
           duration: Duration(seconds: 2), dismissOnTap: true);
     }
