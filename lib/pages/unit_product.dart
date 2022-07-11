@@ -28,7 +28,6 @@ const kPrimaryLightColor = Color.fromARGB(90,43,144,84);
 const kTextColor = Color(0xFF3C4046);
 const kBackgroundColor = Color(0xFFF9F8FD);
 
-
 class _UnitProductState extends State<UnitProduct> {
   List productsMock = prodsMock;
 
@@ -36,17 +35,44 @@ class _UnitProductState extends State<UnitProduct> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    final productArguments = ModalRoute.of(context)!.settings.arguments;
+    final productArguments =
+        ModalRoute.of(context)!.settings.arguments as List<dynamic>;
+
     return Scaffold(
         appBar: MyAppBar(context,
             isPrincipal: false, secondaryTitle: productArguments[1]),
         endDrawer: MyProductsBag(),
         body: SingleChildScrollView(
-      child: Column(
+        child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ImageAndIcons(size: size),
-          TitleAndPrice(title: "Abutas", description: "Analgésico dental, tónico cerebral, anemia, colesterol, cólico menstrual, diabetes, dismenorrea, esterilidad femenina, fiebre, hemorragia post-menstrual y post operatoria, paludismo, reumatismo, tifoidea, ulceras estomacales. ", price: 12),
+          Padding(
+            padding: const EdgeInsets.only(bottom: kDefaultPadding * 2),
+            child: SizedBox(
+              height: size.height * 0.55,
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: size.height * 0.55,
+                    width: size.width * 1,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 10),
+                          blurRadius: 60,
+                          color: kPrimaryColor.withOpacity(0.29),
+                        ),
+                      ],
+                    ),
+                    child: Image.network(
+                      productArguments[4],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          TitleAndPrice(title: productArguments[1] , description: productArguments[2], price: productArguments[5]),
           SizedBox(height: kDefaultPadding),
           Row(
             children: <Widget>[
@@ -60,7 +86,18 @@ class _UnitProductState extends State<UnitProduct> {
                     ),
                   ),
                   color: kPrimaryColor,
-                  onPressed: () {},
+                  onPressed: () async {
+                  // AGREGAR VALIDACION DE PRODUCTO YA EXISTENTE
+                  await DatabaseHelper.instance.add(
+                    Product(
+                        id: productArguments[0],
+                        image: productArguments[4],
+                        name: productArguments[1],
+                        price: productArguments[5],
+                        stock: productArguments[7]),
+                  );
+                  await EasyLoading.showSuccess('Producto agregado');
+                },
                   child: Text(
                     "Agregar a la bolsa",
                     style: TextStyle(
@@ -102,48 +139,7 @@ class _UnitProductState extends State<UnitProduct> {
           ),
         ],
       ),
-    )
-    );
-  }
-}
-
-class ImageAndIcons extends StatelessWidget {
-  const ImageAndIcons({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: kDefaultPadding * 2),
-      child: SizedBox(
-        height: size.height * 0.55,
-        child: Row(
-          children: <Widget>[
-            Container(
-              height: size.height * 0.55,
-              width: size.width * 1,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 10),
-                    blurRadius: 60,
-                    color: kPrimaryColor.withOpacity(0.29),
-                  ),
-                ],
-                image: DecorationImage(
-                  alignment: Alignment.centerLeft,
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/img.png"),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      )   
     );
   }
 }

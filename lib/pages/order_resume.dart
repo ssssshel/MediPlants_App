@@ -15,11 +15,6 @@ class OrderResume extends StatefulWidget {
   State<OrderResume> createState() => _OrderResumeState();
 }
 
-const kPrimaryColor = Color.fromARGB(255,203,227,100);
-const kPrimaryLightColor = Color.fromARGB(90,43,144,84);
-const kTextColor = Color(0xFF3C4046);
-
-
 class _OrderResumeState extends State<OrderResume> {
   // dynamic products = DatabaseHelper.instance.getProducts();
   String products = "ddd42";
@@ -119,7 +114,7 @@ class _OrderResumeState extends State<OrderResume> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
               child: Text(
-                "Ir a pagars",
+                "Ir a pagar",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 14.0,
@@ -131,9 +126,4 @@ class _OrderResumeState extends State<OrderResume> {
       ),
     );
   }
-}
-
-
-void _showCheckout(BuildContext context) {
-  Navigator.of(context).pushNamed("/checkout");
 }

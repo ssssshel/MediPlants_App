@@ -16,12 +16,13 @@ class _ProductsMenuState extends State<ProductsMenu> {
   List<dynamic> items = [];
   // bool hasMore = true;
 
-const double kDefaultPadding = 15.0;
-const kPrimaryColor = Color.fromARGB(255,43,144,84);
-const kPrimaryLightColor = Color.fromARGB(90,43,144,84);
-
-Future<void> getProducts() async {
-  http.Response response = await _client.get(_fetchProductsUrl);
+  @override
+  void initState() {
+    super.initState();
+    fetch();
+    // if (!mounted) {
+    // }
+  }
 
   @override
   void deactivate() {
@@ -55,147 +56,73 @@ Future<void> getProducts() async {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    const headerHeight = 85.0;
-    const defaultPadding = 20.0;
-    const cartBarHeight = 1.0;
-    
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        bottom:false,
-        child: Container(
-          color: Color(0xFFEAEAEA),
-          child: LayoutBuilder(
-            builder:(context, BoxConstraints constraints) {
-            return Stack(
-            children: [ 
-              Positioned(
-                top: 10,
-                right: 0,
-                left: 0,
-                height: constraints.maxHeight - 20,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                  child: GridView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: productsMock.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.75,
-                      mainAxisSpacing: defaultPadding,
-                      crossAxisSpacing: defaultPadding
-                    ), 
-                    itemBuilder: (BuildContext context, int index) {
-                      final String title = productsMock[index]['name'];
-                      return GestureDetector(
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: defaultPadding/6),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFF7F7F7),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(defaultPadding),
-                            ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container( // Border width
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: SizedBox.fromSize(
-                                    size: Size.fromRadius(60), // Image radius
-                                    child: Image.network(productsMock[index]['img'], fit: BoxFit.cover),
+      body: ListView.builder(
+          padding: EdgeInsets.only(top: 20),
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            if (index <= items.length) {
+              final item = items[index];
+
+              return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 310,
+                        child: GestureDetector(
+                            onTap: () {
+                              _showUnitProductMenu(context, item);
+                            },
+                            child: Column(
+                              children: [
+                                Container(
+                                  child: Image.network(
+                                    item[4],
+                                    fit: BoxFit.cover,
+                                    height: 250,
+                                    width: 450,
                                   ),
                                 ),
-                              ),
-                              Text(
-                                title.toUpperCase(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle1!
-                                    .copyWith(fontWeight: FontWeight.w600, color: kPrimaryColor),
-                              ),
-                              Text(
-                                productsMock[index]['category'].toUpperCase(),
-                                style: Theme.of(context).textTheme.caption,
-                              ),
-                              Row(
-                                children: [
-                                  Price(amount: productsMock[index]['price']),
-                                  Spacer(),
-                                  TextButton(
-                                    onPressed: () {
-                                      _showUnitProductMenu(context, index);
-                                    },
-                                  child: Text("ver")),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                )
-              )
-            ]
-          );
-          }
-        )
-       )
-      )
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(item[1],
+                                              style: TextStyle(fontSize: 18)),
+                                          Text(item[3]),
+                                        ],
+                                      ),
+                                      TextButton(
+                                          onPressed: () {
+                                            _showUnitProductMenu(context, item);
+                                          },
+                                          child: Text("Ver opciones"))
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )),
+                      )
+                    ],
+                  ));
+            } else {
+              return Text("No hay productos");
+            }
+          }),
     );
   }
 }
 
 void _showUnitProductMenu(BuildContext context, List<dynamic> item) {
   Navigator.of(context).pushNamed("/unitproduct", arguments: item);
-}
-
-
-class Price extends StatelessWidget {
-  const Price({
-    Key? key,
-    required this.amount,
-  }) : super(key: key);
-  final int amount;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
-        text: "S/. ",
-        style: Theme.of(context)
-            .textTheme
-            .subtitle1!
-            .copyWith(fontWeight: FontWeight.w600, color: kPrimaryColor),
-        children: [
-          TextSpan(
-            text: amount.toString(),
-            style: TextStyle(color: Colors.black),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class FavBtn extends StatelessWidget {
-  const FavBtn({
-    Key? key,
-    this.radius = 12,
-  }) : super(key: key);
-
-  final double radius;
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: radius,
-      backgroundColor: Color(0xFFE3E2E3),
-      child: Image.asset("assets/heart.png"),
-    );
-  }
 }

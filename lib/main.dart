@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mediplants_app/pages/unit_product.dart';
 import 'package:mediplants_app/services/auth.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
 import 'package:native_notify/native_notify.dart';
 
 import 'pages/checkout.dart';
@@ -13,7 +13,6 @@ import 'pages/register.dart';
 import 'pages/welcome.dart';
 import 'pages/login.dart';
 import 'pages/principal.dart';
-import 'pages/unit_product.dart';
 import 'pages/order_resume.dart';
 import 'pages/order_details.dart';
 
@@ -22,7 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NativeNotify.initialize(1077, 'wjqxfx2cQpm1s2DHLJ3Q0a', null, null);
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(name:"MediPlants",options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
